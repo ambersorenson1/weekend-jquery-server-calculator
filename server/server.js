@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 
-let calculationArray=[];
-let HistoryArray = [];
+let arrayOfCalculations=[];
+let previousInputedData = [];
 let sum = 0;
 
 // This must be added before GET & POST routes.
@@ -17,49 +17,49 @@ app.use(express.static('server/public'));
 
 app.post('/values', (req, res) =>{
       console.log('req is', req.body);
-      calculationArray.push(req.body);
-      solvingMath()
-      console.log(calculationArray);
+      arrayOfCalculations.push(req.body);
+      mathEquationSolution()
+      console.log(arrayOfCalculations);
       res.sendStatus(201);
 });
 app.get('/history', (req, res) => {
     console.log('history path', req.body.path);
-    res.send(HistoryArray);
+    res.send(previousInputedData);
  });
  //sending MathInputs to the GET function on the client side.
       app.get('/results', (req, res) =>{
       console.log('results path', req.route.path);
 //it's being sent here.
-     res.send(calculationArray);
+     res.send(arrayOfCalculations);
 });
 
 // create a function for if's conditional
 
-  function solvingMath(){ 
-      for (let aNumber of calculationArray){
+  function mathEquationSolution(){ 
+      for (let number of arrayOfCalculations){
         let fullSolve = {
           sum: sum,
-          num1: aNumber.num1,
-          num2: aNumber.num2,
-          numBtn: aNumber.button
+          num1: number.num1,
+          num2: number.num2,
+          numBtn: number.button
         }
-      if (aNumber.button == "add-btn") {
-          sum = Number(aNumber.num1) + Number(aNumber.num2);
+      if (number.button == "add-btn") {
+          sum = Number(number.num1) + Number(number.num2);
 
     }
-      else if (aNumber.button == "minus-btn") {
-          sum = Number(aNumber.num1) - Number(aNumber.num2);
+      else if (number.button == "minus-btn") {
+          sum = Number(number.num1) - Number(number.num2);
     }
-      else if (aNumber.button == "multiply-btn") {
-          sum = Number(aNumber.num1) * Number(aNumber.num2);
+      else if (number.button == "multiply-btn") {
+          sum = Number(number.num1) * Number(number.num2);
     }
-      else if (aNumber.button == "divide-btn") {
-          sum = Number(aNumber.num1) / Number(aNumber.num2);
+      else if (number.button == "divide-btn") {
+          sum = Number(number.num1) / Number(number.num2);
     }
-  HistoryArray.push(fullSolve);
+  previousInputedData.push(fullSolve);
   }
-      console.log(HistoryArray);
-      console.log(calculationArray);
+      console.log(previousInputedData);
+      console.log(arrayOfCalculations);
 }
 
     app.listen(PORT, (res) => {
