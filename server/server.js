@@ -24,13 +24,11 @@ app.post('/values', (req, res) =>{
 });
 app.get('/history', (req, res) => {
     console.log('history path', req.body.path);
-    solvingMath();
     res.send(HistoryArray);
  });
  //sending MathInputs to the GET function on the client side.
       app.get('/results', (req, res) =>{
       console.log('results path', req.route.path);
-      solvingMath();
 //it's being sent here.
      res.send(calculationArray);
 });
@@ -47,22 +45,18 @@ app.get('/history', (req, res) => {
         }
       if (aNumber.button == "add-btn") {
           sum = Number(aNumber.num1) + Number(aNumber.num2);
-          calculationArray.push(sum);
 
     }
       else if (aNumber.button == "minus-btn") {
           sum = Number(aNumber.num1) - Number(aNumber.num2);
-          calculationArray.push(sum);
     }
       else if (aNumber.button == "multiply-btn") {
           sum = Number(aNumber.num1) * Number(aNumber.num2);
-          calculationArray.push(sum);
     }
       else if (aNumber.button == "divide-btn") {
           sum = Number(aNumber.num1) / Number(aNumber.num2);
-          calculationArray.push(sum);
     }
-      HistoryArray.push(fullSolve);
+  HistoryArray.push(fullSolve);
   }
       console.log(HistoryArray);
       console.log(calculationArray);
