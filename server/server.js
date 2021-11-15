@@ -23,14 +23,14 @@ app.post('/values', (req, res) =>{
       res.sendStatus(201);
 });
 app.get('/history', (req, res) => {
-    console.log('history path', req.body.path);
+    console.log('history path', req.route.path);
     res.send(previousInputedData);
  });
  //sending MathInputs to the GET function on the client side.
       app.get('/results', (req, res) =>{
       console.log('results path', req.route.path);
 //it's being sent here.
-     res.sendStatus(arrayOfCalculations);
+     res.send(arrayOfCalculations);
 });
 
 // create a function for if's conditional

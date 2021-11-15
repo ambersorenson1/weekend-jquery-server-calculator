@@ -33,6 +33,9 @@ let holdingArray = [];
       else if ($(this).attr('id') == "divide-btn"){
           buttonClicked = "divide-btn"; 
         }
+      else if ($(this).attr('id') == "clear-btn"){
+        buttonClicked = $('#first-number').val(''), $('#second-number').val('');
+        }
     }
 
       console.log('show results of buttonClicked', buttonClicked );
