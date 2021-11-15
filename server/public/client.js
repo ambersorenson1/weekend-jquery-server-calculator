@@ -1,7 +1,6 @@
 $(document).ready(onReady);
 
 let buttonClicked = "";
-let holdingArray = [];
 
 // Create new functions for calculations buttons.
 // create seperate button to solve the calculation.
@@ -49,10 +48,6 @@ let holdingArray = [];
         button: buttonClicked
       }
 
-  // Push the information from the object into the empty holdingNumbers Array.
-  // log it to test it.
-      holdingArray.push(valuesObject);
-      console.log(holdingArray);
 
   // Now, we need to send the information to the server by creating routes
   // Using the Ajax method to send the response. 
@@ -64,16 +59,20 @@ let holdingArray = [];
         data: valuesObject,
     }).then ( (response) => {
       console.log('POST route /values', response);
+    if ( response === 'OK' ){
+      // Ceate function to get results of calculation.
+        calculationResults();
 
-  // Ceate function to get results of calculation.
-    calculationResults();
-
-  // Create function to get the history of all calcualtions.
-    calculationHistory();
-
+      // Create function to get the history of all calcualtions.
+        calculationHistory();
+    }
+    else {
+      console.log(response)
+    }
     }).catch (error => {
       console.log('POST route /values', error);
     });
+
   }
 
 // Create GET route request to push the calculation results to the DOM.

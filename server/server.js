@@ -20,17 +20,17 @@ app.post('/values', (req, res) =>{
       //arrayOfCalculations.push(req.body);
       mathEquationSolution(req.body)
       console.log(arrayOfCalculations);
-      res.sendStatus(201);
+      res.sendStatus(200);
 });
 app.get('/history', (req, res) => {
     console.log('history path', req.route.path);
     res.send(previousInputedData);
- });
+});
  //sending MathInputs to the GET function on the client side.
       app.get('/results', (req, res) =>{
       console.log('results path', req.route.path);
 //it's being sent here.
-     res.send(arrayOfCalculations);
+    res.send(arrayOfCalculations);
 });
 
 // create a function for if's conditional
@@ -41,7 +41,7 @@ app.get('/history', (req, res) => {
           num2: number.num2,
           numBtn: number.button
         }
-      if (number.button ==="add-btn") {
+      if (number.button === "add-btn") {
           solution.sum = Number(number.num1) + Number(number.num2);
             arrayOfCalculations.push(solution.sum)
     }
